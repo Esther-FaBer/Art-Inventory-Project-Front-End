@@ -1,0 +1,173 @@
+/* ArtworksPage.css */
+
+/* Page wrapper */
+.artworks-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  font-family: Arial, sans-serif;
+}
+
+/* Page heading row */
+.artworks-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.artworks-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #202124;
+  margin: 0;
+}
+
+/* Small grey count next to the heading */
+.artworks-count {
+  font-size: 14px;
+  color: #5f6368;
+  margin: 0;
+}
+
+/* Search and filter controls row */
+.artworks-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+/* Label + input stacked vertically */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input-group label {
+  font-size: 12px;
+  color: #5f6368;
+}
+
+.input-group input,
+.input-group select {
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  color: #202124;
+  background-color: #ffffff;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  outline: none;
+}
+
+.input-group input {
+  width: 280px;
+}
+
+.input-group select {
+  width: 160px;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+/* Loading, error, and empty state messages */
+.status-message {
+  font-size: 15px;
+  color: #5f6368;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.status-message.error {
+  color: #d93025;
+}
+
+/* Grid layout for artwork cards */
+.artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Individual artwork card */
+.artwork-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: box-shadow 0.2s ease;
+}
+
+.artwork-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card body */
+.artwork-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #202124;
+  margin: 0 0 4px 0;
+}
+
+.artwork-artist {
+  font-size: 14px;
+  color: #1a73e8;
+  margin: 0 0 12px 0;
+}
+
+/* Type badge and year on the same row */
+.artwork-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.artwork-type {
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #5f6368;
+  padding: 2px 10px;
+  border-radius: 12px;
+  text-transform: capitalize;
+}
+
+.artwork-year {
+  font-size: 13px;
+  color: #5f6368;
+}
+
+.artwork-medium {
+  font-size: 13px;
+  color: #5f6368;
+  margin: 0 0 4px 0;
+  font-style: italic;
+}
+
+.artwork-dimensions {
+  font-size: 12px;
+  color: #9aa0a6;
+  margin: 0;
+}
+
+/* Card footer */
+.artwork-card-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.artwork-price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #202124;
+}
