@@ -16,6 +16,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Path aliases - lets you import from src/ without long relative paths */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
