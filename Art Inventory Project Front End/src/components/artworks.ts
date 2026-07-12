@@ -1,5 +1,5 @@
 import axiosInstance from './axiosInstance';
-import { Artwork } from '../types/artwork';
+import type { Artwork } from '../types/artwork';
 
 export const getArtworks = () =>
   axiosInstance.get<Artwork[]>('/artworks');
