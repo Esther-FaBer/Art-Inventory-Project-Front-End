@@ -4,19 +4,9 @@ import type { Artwork } from '../types/artwork';
 import './ArtworksPage.css';
 
 const ArtworksPage = () => {
-  
+
   // All artworks fetched from the API
   const [artworks, setArtworks] = useState<Artwork[]>([]);
-
-  // The filtered list shown on screen after search/filter
- const filteredArtworks = artworks.filter((artwork) => {
-  const matchesType = selectedType === 'all' || artwork.artwork_type === selectedType;
-  const matchesSearch =
-    searchQuery === '' ||
-    artwork.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    artwork.artist_name.toLowerCase().includes(searchQuery.toLowerCase());
-  return matchesType && matchesSearch;
-});
 
   // What the user has typed in the search box
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,9 +18,20 @@ const ArtworksPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasErrored, setHasErrored] = useState(false);
 
+
+
+  const filteredArtworks = artworks.filter((artwork) => {
+    const matchesType =
+      selectedType === 'all' || artwork.artwork_type === selectedType;
+    const matchesSearch =
+      searchQuery === '' ||
+      artwork.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      artwork.artist_name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesType && matchesSearch;
+  });
+
   // Fetch all artworks when the page first loads
   useEffect(() => {
-
     getArtworks()
       .then((response) => {
         setArtworks(response.data);
@@ -42,29 +43,6 @@ const ArtworksPage = () => {
         setIsLoading(false);
       });
   }, []);
-
-  // Re-filter the list whenever the search query or selected type changes
-  useEffect(() => {
-    let results = artworks;
-
-    // Filter by artwork type if one is selected
-    if (selectedType !== 'all') {
-      results = results.filter(
-        (artwork) => artwork.artwork_type === selectedType
-      );
-    }
-
-    // Filter by search query across title and artist name
-    if (searchQuery !== '') {
-      results = results.filter(
-        (artwork) =>
-          artwork.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          artwork.artist_name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-
-    setFilteredArtworks(results);
-  }, [searchQuery, selectedType, artworks]);
 
   // Called every time the user types in the search box
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
