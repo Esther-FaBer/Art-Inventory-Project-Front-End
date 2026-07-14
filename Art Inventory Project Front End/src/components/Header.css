@@ -1,0 +1,186 @@
+/* Header.css */
+
+/* The full-width top bar */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 64px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ── Left side ────────────────────────────────── */
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Search bar wrapper */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f1f3f4;
+  border: 1px solid transparent;
+  border-radius: 24px;
+  padding: 0 16px;
+  width: 340px;
+  height: 40px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Search bar focused state */
+.search-bar:focus-within {
+  background-color: #ffffff;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+.search-icon {
+  font-size: 14px;
+  color: #5f6368;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #202124;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.search-input::placeholder {
+  color: #9aa0a6;
+}
+
+/* ── Right side ───────────────────────────────── */
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icon button wrapper - bell and settings */
+.icon-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.icon-button:hover {
+  background-color: #f1f3f4;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+/* Red dot on the bell icon */
+.notification-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background-color: #d93025;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+/* Notifications dropdown */
+.notifications-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 280px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  z-index: 200;
+}
+
+.notifications-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #202124;
+  margin: 0 0 8px 0;
+  font-family: Arial, sans-serif;
+}
+
+.notification-item {
+  font-size: 13px;
+  color: #5f6368;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Thin vertical divider between icons and user info */
+.header-divider {
+  width: 1px;
+  height: 32px;
+  background-color: #e0e0e0;
+  margin: 0 8px;
+}
+
+/* ── User info ────────────────────────────────── */
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.user-info:hover {
+  background-color: #f1f3f4;
+}
+
+/* Circle with user initials */
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #1a73e8;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #202124;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.user-role {
+  font-size: 12px;
+  color: #5f6368;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
