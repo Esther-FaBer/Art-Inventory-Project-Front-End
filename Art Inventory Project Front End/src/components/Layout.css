@@ -1,0 +1,22 @@
+/* Layout.css */
+
+/* Outer wrapper - stacks header on top, body below */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Below the header - sidebar + main content side by side */
+.layout-body {
+  display: flex;
+  flex: 1;
+}
+
+/* The main content area - takes up all remaining space */
+.layout-main {
+  flex: 1;
+  padding: 32px 24px;
+  overflow-y: auto;
+}
