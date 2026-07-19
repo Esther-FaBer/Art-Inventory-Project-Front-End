@@ -34,7 +34,7 @@ const ArtworksPage = () => {
   useEffect(() => {
     getArtworks()
       .then((response) => {
-        setArtworks(response.data);
+        setArtworks(response.data.artworks);
       })
       .catch(() => {
         setHasErrored(true);

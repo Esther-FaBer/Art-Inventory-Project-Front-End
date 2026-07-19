@@ -2,7 +2,7 @@ import axiosInstance from './axiosInstance';
 import type { Artwork } from '../types/artwork';
 
 export const getArtworks = () =>
-  axiosInstance.get<Artwork[]>('/artworks');
+  axiosInstance.get<{ artworks: Artwork[] }>('/artworks');
 
 export const getArtwork = (id: number) =>
   axiosInstance.get<Artwork>(`/artworks/${id}`);
