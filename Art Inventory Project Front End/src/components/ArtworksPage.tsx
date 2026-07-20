@@ -64,6 +64,7 @@ const ArtworksPage = () => {
 
   // Format the dimensions into a readable string
   const formatDimensions = (artwork: Artwork) => {
+    if (!artwork.dimensions) return 'Dimensions not available';
     const { height, width, depth, unit } = artwork.dimensions;
     return `${height} x ${width} x ${depth} ${unit}`;
   };

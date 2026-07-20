@@ -14,5 +14,8 @@ export type Artwork = {
   medium: string;
   price: number;
   currency: string;
-  dimensions: Dimensions;
+    dimensions?: Dimensions;
+  status: string;
+  vat_status: string;
+  edition: number | null;
 };
