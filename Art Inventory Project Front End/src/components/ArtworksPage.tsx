@@ -56,11 +56,12 @@ const ArtworksPage = () => {
 
   // Format the price with currency symbol
   const formatPrice = (price: number, currency: string) => {
+    if (!price) return 'Price not available';
     return new Intl.NumberFormat('en-GB', {
-      style: 'currency',
-      currency: currency,
-    }).format(price);
-  };
+    style: 'currency',
+    currency: currency,
+  }).format(price);
+};
 
   // Format the dimensions into a readable string
   const formatDimensions = (artwork: Artwork) => {
@@ -121,7 +122,7 @@ const ArtworksPage = () => {
       {/* Artworks grid */}
       <div className="artworks-grid">
         {filteredArtworks.map((artwork) => (
-          <div key={artwork.id} className="artwork-card">
+          <div key={artwork.artwork_id} className="artwork-card">
 
             <div className="artwork-card-body">
               <h2 className="artwork-title">{artwork.title}</h2>
@@ -138,7 +139,7 @@ const ArtworksPage = () => {
 
             <div className="artwork-card-footer">
               <span className="artwork-price">
-                {formatPrice(artwork.price, artwork.currency)}
+                {formatPrice(artwork.price, artwork.currency ?? 'GBP')}
               </span>
             </div>
 

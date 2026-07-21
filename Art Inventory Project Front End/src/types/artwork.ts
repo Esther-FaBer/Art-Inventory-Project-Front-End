@@ -6,15 +6,16 @@ export type Dimensions = {
 };
 
 export type Artwork = {
-  id: number;
+  artwork_id: number;
+  artist_id: number;
   artist_name: string;
   title: string;
-  year_created: string;
+  year_created: number;
   artwork_type: string;
   medium: string;
   price: number;
-  currency: string;
-    dimensions?: Dimensions;
+  currency?: string;
+  dimensions?: Dimensions;
   status: string;
   vat_status: string;
   edition: number | null;
