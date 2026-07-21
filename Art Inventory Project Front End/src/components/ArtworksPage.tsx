@@ -71,8 +71,29 @@ const ArtworksPage = () => {
   };
 
   if (isLoading) {
-    return <p className="status-message">Loading artworks...</p>;
-  }
+   return (
+    <div className="artworks-page">
+      <div className="artworks-header">
+        <h1>Artworks</h1>
+      </div>
+      <div className="artworks-grid">
+        {[1, 2, 3, 4, 5, 6].map((n) => (
+          <div key={n} className="artwork-card skeleton-card">
+            <div className="artwork-card-body">
+              <div className="skeleton skeleton-title"></div>
+              <div className="skeleton skeleton-artist"></div>
+              <div className="skeleton skeleton-details"></div>
+              <div className="skeleton skeleton-medium"></div>
+            </div>
+            <div className="artwork-card-footer">
+              <div className="skeleton skeleton-price"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
   if (hasErrored) {
     return <p className="status-message error">Something went wrong. Please try again.</p>;
