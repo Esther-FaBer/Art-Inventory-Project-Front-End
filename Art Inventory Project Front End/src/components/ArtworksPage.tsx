@@ -20,6 +20,9 @@ const ArtworksPage = () => {
 
 
 
+// The artwork currently shown in the detail panel (null = panel closed)
+  const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
+
   const filteredArtworks = artworks.filter((artwork) => {
     const matchesType =
       selectedType === 'all' || artwork.artwork_type === selectedType;
@@ -52,6 +55,16 @@ const ArtworksPage = () => {
   // Called every time the user picks a type from the dropdown
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedType(e.target.value);
+  };
+
+  // Opens the detail panel with the clicked artwork
+  const handleCardClick = (artwork: Artwork) => {
+    setSelectedArtwork(artwork);
+  };
+
+    // Closes the detail panel
+  const handleClosePanel = () => {
+    setSelectedArtwork(null);
   };
 
   // Format the price with currency symbol
@@ -104,72 +117,143 @@ const ArtworksPage = () => {
   return (
     <div className="artworks-page">
 
+      {/* Page header */}
       <div className="artworks-header">
-        <h1>Artworks</h1>
+        <h1>ARTWORKS</h1>
         <p className="artworks-count">{filteredArtworks.length} works</p>
       </div>
 
       {/* Search and filter controls */}
       <div className="artworks-controls">
-
         <div className="input-group">
-          <label htmlFor="search">Search</label>
           <input
             type="text"
             id="search"
-            placeholder="Search by title or artist..."
+            placeholder="Search..."
             value={searchQuery}
             onChange={handleSearch}
           />
         </div>
-
         <div className="input-group">
-          <label htmlFor="type">Type</label>
           <select id="type" value={selectedType} onChange={handleTypeChange}>
             <option value="all">All types</option>
             <option value="painting">Painting</option>
             <option value="sculpture">Sculpture</option>
-            <option value="drawing">Drawing</option>
-            <option value="photography">Photography</option>
+            <option value="photograph">Photograph</option>
             <option value="print">Print</option>
+            <option value="installation">Installation</option>
           </select>
         </div>
-
       </div>
 
-      {/* No results message */}
-      {filteredArtworks.length === 0 && (
-        <p className="status-message">No artworks match your search.</p>
-      )}
+      {/* Main content area - grid + detail panel side by side */}
+      <div className="artworks-content">
 
-      {/* Artworks grid */}
-      <div className="artworks-grid">
-        {filteredArtworks.map((artwork) => (
-          <div key={artwork.artwork_id} className="artwork-card">
+        {/* Artworks grid */}
+        <div className={`artworks-grid ${selectedArtwork ? 'grid-with-panel' : ''}`}>
 
-            <div className="artwork-card-body">
-              <h2 className="artwork-title">{artwork.title}</h2>
-              <p className="artwork-artist">{artwork.artist_name}</p>
+          {filteredArtworks.length === 0 && (
+            <p className="status-message">No artworks match your search.</p>
+          )}
 
-              <div className="artwork-details">
-                <span className="artwork-type">{artwork.artwork_type}</span>
-                <span className="artwork-year">{artwork.year_created}</span>
+          {filteredArtworks.map((artwork) => (
+            <div
+              key={artwork.artwork_id}
+              className={`artwork-card ${selectedArtwork?.artwork_id === artwork.artwork_id ? 'artwork-card-active' : ''}`}
+              onClick={() => handleCardClick(artwork)}
+            >
+              {/* Artwork image */}
+              <div className="artwork-image-wrapper">
+                {artwork.image_url ? (
+                  <img
+                    src={artwork.image_url}
+                    alt={artwork.title}
+                    className="artwork-image"
+                  />
+                ) : (
+                  <div className="artwork-image-placeholder">
+                    <span>No image</span>
+                  </div>
+                )}
               </div>
 
-              <p className="artwork-medium">{artwork.medium}</p>
-              <p className="artwork-dimensions">{formatDimensions(artwork)}</p>
+              {/* Card details below image */}
+              <div className="artwork-card-body">
+                <p className="artwork-artist">{artwork.artist_name}</p>
+                <p className="artwork-title"><em>{artwork.title}</em>, {artwork.year_created}</p>
+                <p className="artwork-dimensions">{formatDimensions(artwork)}</p>
+                <p className="artwork-medium">{artwork.medium}</p>
+              </div>
+
+              {/* Status dot and price at the bottom */}
+              <div className="artwork-card-footer">
+                <span className={`status-dot status-${artwork.status}`}></span>
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+        {/* Detail panel - slides in when an artwork is selected */}
+        {selectedArtwork && (
+          <div className="detail-panel">
+
+            <button className="detail-panel-close" onClick={handleClosePanel}>✕</button>
+
+            {/* Artwork image */}
+            <div className="detail-image-wrapper">
+              {selectedArtwork.image_url ? (
+                <img
+                  src={selectedArtwork.image_url}
+                  alt={selectedArtwork.title}
+                  className="detail-image"
+                />
+              ) : (
+                <div className="detail-image-placeholder">
+                  <span>No image available</span>
+                </div>
+              )}
             </div>
 
-            <div className="artwork-card-footer">
-              <span className="artwork-price">
-                {formatPrice(artwork.price, artwork.currency ?? 'GBP')}
-              </span>
+            {/* Artwork info */}
+            <div className="detail-info">
+              <p className="detail-artist">{selectedArtwork.artist_name}</p>
+              <p className="detail-title"><em>{selectedArtwork.title}</em>, {selectedArtwork.year_created}</p>
+              <p className="detail-medium">{selectedArtwork.medium}</p>
+              <p className="detail-dimensions">{formatDimensions(selectedArtwork)}</p>
             </div>
+
+            {/* Status section */}
+            <div className="detail-section">
+              <p className="detail-section-label">STATUS</p>
+              <div className="detail-status-row">
+                <span className={`status-dot status-${selectedArtwork.status}`}></span>
+                <span className="detail-status-text">{selectedArtwork.status}</span>
+              </div>
+            </div>
+
+            {/* Prices section */}
+            <div className="detail-section">
+              <p className="detail-section-label">PRICES</p>
+              <div className="detail-price-row">
+                <span className="detail-price-label">Price</span>
+                <span className="detail-price-value">
+                  {formatPrice(selectedArtwork.price, selectedArtwork.currency ?? 'GBP')}
+                </span>
+              </div>
+              <div className="detail-price-row">
+                <span className="detail-price-label">VAT status</span>
+                <span className="detail-price-value">{selectedArtwork.vat_status}</span>
+              </div>
+            </div>
+
+            {/* Edit button */}
+            <button className="detail-edit-button">EDIT</button>
 
           </div>
-        ))}
-      </div>
+        )}
 
+      </div>
     </div>
   );
 };
