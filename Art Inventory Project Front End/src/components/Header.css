@@ -65,6 +65,7 @@
 
 .header-right {
   display: flex;
+  position: relative;
   align-items: center;
   gap: 8px;
 }
@@ -183,4 +184,97 @@
   color: #5f6368;
   margin: 0;
   font-family: Arial, sans-serif;
+}
+
+/* ── User menu chevron ────────────────────────── */
+
+.user-chevron {
+  font-size: 10px;
+  color: #5f6368;
+  margin-left: 4px;
+}
+
+/* ── User menu dropdown ───────────────────────── */
+
+.user-menu {
+  position: absolute;
+  top: 60px;
+  right: 24px;
+  width: 240px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 200;
+  overflow: hidden;
+}
+
+/* User summary at the top */
+.user-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.user-menu-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #1a73e8;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-menu-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #202124;
+  margin: 0 0 2px 0;
+  font-family: Arial, sans-serif;
+}
+
+.user-menu-email {
+  font-size: 12px;
+  color: #5f6368;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.user-menu-divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 0;
+}
+
+/* Menu items */
+.user-menu-item {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #202124;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+.user-menu-item:hover {
+  background-color: #f1f3f4;
+}
+
+/* Log out - slightly different colour */
+.user-menu-logout {
+  color: #d93025;
+}
+
+.user-menu-logout:hover {
+  background-color: #fce8e6;
 }

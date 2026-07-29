@@ -1,22 +1,73 @@
 /* Layout.css */
 
-/* Outer wrapper - stacks header on top, body below */
+/* Outer wrapper - stacks everything vertically */
 .layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
 }
 
-/* Below the header - sidebar + main content side by side */
-.layout-body {
+/* ── Horizontal nav bar ───────────────────────── */
+
+.nav-bar {
   display: flex;
-  flex: 1;
+  align-items: center;
+  gap: 32px;
+  padding: 0 32px;
+  height: 52px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 64px;
+  z-index: 90;
 }
 
-/* The main content area - takes up all remaining space */
+/* ArtDB logo in the nav bar */
+.nav-logo {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #202124;
+  letter-spacing: -0.5px;
+  margin-right: 16px;
+}
+
+/* Nav links row */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Each nav link */
+.nav-link {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #5f6368;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: #f1f3f4;
+  color: #202124;
+}
+
+/* Active link - darker text, no background */
+.nav-link.active {
+  color: #202124;
+  font-weight: 500;
+  border-bottom: 2px solid #202124;
+  border-radius: 0;
+}
+
+/* ── Page content ─────────────────────────────── */
+
 .layout-main {
   flex: 1;
-  padding: 32px 24px;
+  background-color: #ffffff;
   overflow-y: auto;
 }
