@@ -169,6 +169,7 @@ const ArtworksPage = () => {
                     src={artwork.image_url}
                     alt={artwork.title}
                     className="artwork-image"
+                    referrerPolicy="no-referrer"
                   />
                 ) : (
                   <div className="artwork-image-placeholder">

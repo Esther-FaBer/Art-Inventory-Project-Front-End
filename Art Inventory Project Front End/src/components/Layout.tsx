@@ -27,6 +27,23 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
 
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-left">
+          <span className="footer-logo">ArtDB</span>
+          <span className="footer-tagline">Art inventory management</span>
+        </div>
+        <div className="footer-center">
+          <NavLink to="/artworks" className="footer-link">Artworks</NavLink>
+          <NavLink to="/artists" className="footer-link">Artists</NavLink>
+          <NavLink to="/contacts" className="footer-link">Contacts</NavLink>
+          <NavLink to="/sales" className="footer-link">Sales</NavLink>
+        </div>
+        <div className="footer-right">
+          <p className="footer-copy">© {new Date().getFullYear()} ArtDB. All rights reserved.</p>
+        </div>
+      </footer>
+
     </div>
   );
 };
