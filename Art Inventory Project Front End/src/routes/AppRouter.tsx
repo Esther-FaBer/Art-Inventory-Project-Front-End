@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from '../components/Layout';
 import ArtworksPage from '../components/ArtworksPage';
 
 const ArtistsPage  = () => <div>Artists page coming soon</div>;
@@ -10,19 +11,12 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-
-        {/* Default route - redirect to artworks */}
-        <Route path="/" element={<ArtworksPage />} />
-
-        {/* Main pages */}
-        <Route path="/artworks" element={<ArtworksPage />} />
-        <Route path="/artists"  element={<ArtistsPage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
-        <Route path="/sales"    element={<SalesPage />} />
-
-        {/* Catch-all for any URL that doesn't match */}
-        <Route path="*" element={<NotFound />} />
-
+        <Route path="/" element={<Layout><ArtworksPage /></Layout>} />
+        <Route path="/artworks" element={<Layout><ArtworksPage /></Layout>} />
+        <Route path="/artists"  element={<Layout><ArtistsPage /></Layout>} />
+        <Route path="/contacts" element={<Layout><ContactsPage /></Layout>} />
+        <Route path="/sales"    element={<Layout><SalesPage /></Layout>} />
+        <Route path="*"         element={<Layout><NotFound /></Layout>} />
       </Routes>
     </BrowserRouter>
   );
