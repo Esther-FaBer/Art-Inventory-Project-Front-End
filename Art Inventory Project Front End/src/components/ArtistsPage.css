@@ -1,0 +1,320 @@
+/* ArtistsPage.css */
+
+.artists-page {
+  padding: 24px 32px;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* ── Header ───────────────────────────────────── */
+
+.artists-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.artists-header h1 {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #202124;
+  margin: 0;
+}
+
+.artists-count {
+  font-size: 13px;
+  color: #9aa0a6;
+  margin: 0;
+}
+
+/* ── Controls ─────────────────────────────────── */
+
+.artists-controls {
+  margin-bottom: 24px;
+}
+
+.artists-controls input {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #202124;
+  background-color: #f1f3f4;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  outline: none;
+  width: 280px;
+  font-family: Arial, sans-serif;
+}
+
+.artists-controls input:focus {
+  background-color: #ffffff;
+  border-color: #1a73e8;
+}
+
+/* ── Content area ─────────────────────────────── */
+
+.artists-content {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+
+/* ── Artists list ─────────────────────────────── */
+
+.artists-list {
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.list-with-panel {
+  max-width: 60%;
+}
+
+/* Column headers */
+.artist-list-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 10px 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.artist-list-header span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #5f6368;
+  text-transform: uppercase;
+}
+
+/* Each artist row */
+.artist-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f3f4;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-items: center;
+}
+
+.artist-row:last-child {
+  border-bottom: none;
+}
+
+.artist-row:hover {
+  background-color: #f8f9fa;
+}
+
+.artist-row-active {
+  background-color: #e8f0fe;
+}
+
+.col-name {
+  font-size: 14px;
+  color: #202124;
+  font-weight: 500;
+}
+
+.col-nationality {
+  font-size: 13px;
+  color: #5f6368;
+}
+
+.col-dates {
+  font-size: 13px;
+  color: #5f6368;
+}
+
+/* ── Detail panel ─────────────────────────────── */
+
+.artist-detail-panel {
+  width: 360px;
+  min-width: 360px;
+  border-left: 1px solid #e0e0e0;
+  padding: 24px;
+  position: sticky;
+  top: 116px;
+  max-height: calc(100vh - 116px);
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.detail-panel-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #5f6368;
+  cursor: pointer;
+  float: right;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.detail-panel-close:hover {
+  color: #202124;
+}
+
+.artist-detail-info {
+  margin-bottom: 24px;
+}
+
+.artist-detail-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #202124;
+  margin: 0 0 6px 0;
+}
+
+.artist-detail-meta {
+  font-size: 13px;
+  color: #5f6368;
+  margin: 0 0 12px 0;
+}
+
+.artist-detail-biography {
+  font-size: 13px;
+  color: #202124;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Works section */
+.artist-detail-section {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 16px;
+}
+
+.artist-detail-section-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #5f6368;
+  margin: 0 0 12px 0;
+}
+
+.artist-detail-loading,
+.artist-detail-empty {
+  font-size: 13px;
+  color: #9aa0a6;
+  margin: 0;
+}
+
+/* Artwork row in detail panel */
+.artist-artwork-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.artist-artwork-row:last-child {
+  border-bottom: none;
+}
+
+.artist-artwork-thumb {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: #f1f3f4;
+  border-radius: 2px;
+}
+
+.artist-artwork-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-artwork-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f1f3f4;
+}
+
+.artist-artwork-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.artist-artwork-title {
+  font-size: 13px;
+  color: #202124;
+  margin: 0;
+}
+
+.artist-artwork-medium {
+  font-size: 12px;
+  color: #5f6368;
+  margin: 0;
+}
+
+/* ── Skeleton ─────────────────────────────────── */
+
+.skeleton {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.skeleton-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f3f4;
+  gap: 16px;
+  align-items: center;
+}
+
+.skeleton-name {
+  height: 14px;
+  width: 70%;
+}
+
+.skeleton-nationality {
+  height: 13px;
+  width: 60%;
+}
+
+.skeleton-dates {
+  height: 13px;
+  width: 50%;
+}
+
+/* ── Status dots ──────────────────────────────── */
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-available { background-color: #34a853; }
+.status-sold      { background-color: #ea4335; }
+.status-reserved  { background-color: #fbbc04; }
+
+/* ── Status message ───────────────────────────── */
+
+.status-message {
+  font-size: 14px;
+  color: #5f6368;
+  padding: 16px;
+}
+
+.status-message.error {
+  color: #ea4335;
+}

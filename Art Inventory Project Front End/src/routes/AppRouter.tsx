@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '../components/Layout';
 import ArtworksPage from '../components/ArtworksPage';
+import ArtistsPage from '../components/ArtistsPage';
 
-const ArtistsPage  = () => <div>Artists page coming soon</div>;
 const ContactsPage = () => <div>Contacts page coming soon</div>;
 const SalesPage    = () => <div>Sales page coming soon</div>;
 const NotFound     = () => <div>404 - Page not found</div>;
