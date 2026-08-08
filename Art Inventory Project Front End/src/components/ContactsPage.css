@@ -1,6 +1,6 @@
-/* ArtistsPage.css */
+/* ContactsPage.css */
 
-.artists-page {
+.contacts-page {
   padding: 24px 32px;
   font-family: Arial, sans-serif;
   background-color: #ffffff;
@@ -9,14 +9,14 @@
 
 /* ── Header ───────────────────────────────────── */
 
-.artists-header {
+.contacts-header {
   display: flex;
   align-items: baseline;
   gap: 16px;
   margin-bottom: 20px;
 }
 
-.artists-header h1 {
+.contacts-header h1 {
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 2px;
@@ -24,7 +24,7 @@
   margin: 0;
 }
 
-.artists-count {
+.contacts-count {
   font-size: 13px;
   color: #9aa0a6;
   margin: 0;
@@ -32,11 +32,14 @@
 
 /* ── Controls ─────────────────────────────────── */
 
-.artists-controls {
+.contacts-controls {
+  display: flex;
+  gap: 12px;
   margin-bottom: 24px;
 }
 
-.artists-controls input {
+.contacts-controls input,
+.contacts-controls select {
   height: 36px;
   padding: 0 12px;
   font-size: 13px;
@@ -45,26 +48,34 @@
   border: 1px solid transparent;
   border-radius: 4px;
   outline: none;
-  width: 280px;
   font-family: Arial, sans-serif;
 }
 
-.artists-controls input:focus {
+.contacts-controls input {
+  width: 260px;
+}
+
+.contacts-controls select {
+  width: 160px;
+}
+
+.contacts-controls input:focus,
+.contacts-controls select:focus {
   background-color: #ffffff;
   border-color: #1a73e8;
 }
 
 /* ── Content area ─────────────────────────────── */
 
-.artists-content {
+.contacts-content {
   display: flex;
   gap: 0;
   align-items: flex-start;
 }
 
-/* ── Artists list ─────────────────────────────── */
+/* ── Contacts list ────────────────────────────── */
 
-.artists-list {
+.contacts-list {
   flex: 1;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
@@ -72,46 +83,63 @@
 }
 
 .list-with-panel {
-  max-width: 60%;
+  max-width: 65%;
 }
 
 /* Column headers */
-.artist-list-header {
+.contact-list-header {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 48px 2fr 1fr 2fr 1.5fr;
   padding: 10px 16px;
   background-color: #f8f9fa;
   border-bottom: 1px solid #e0e0e0;
+  gap: 16px;
+  align-items: center;
 }
 
-.artist-list-header span {
+.contact-list-header span {
   font-size: 11px;
   letter-spacing: 1px;
   color: #5f6368;
   text-transform: uppercase;
 }
 
-/* Each artist row */
-.artist-row {
+/* Each contact row */
+.contact-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  padding: 12px 16px;
+  grid-template-columns: 48px 2fr 1fr 2fr 1.5fr;
+  padding: 10px 16px;
   border-bottom: 1px solid #f1f3f4;
   cursor: pointer;
   transition: background-color 0.2s;
   align-items: center;
+  gap: 16px;
 }
 
-.artist-row:last-child {
+.contact-row:last-child {
   border-bottom: none;
 }
 
-.artist-row:hover {
+.contact-row:hover {
   background-color: #f8f9fa;
 }
 
-.artist-row-active {
+.contact-row-active {
   background-color: #e8f0fe;
+}
+
+/* Avatar circle with initials */
+.contact-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .col-name {
@@ -120,21 +148,31 @@
   font-weight: 500;
 }
 
-.col-nationality {
+.col-type {
+  font-size: 13px;
+}
+
+.contact-type-badge {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.col-email {
   font-size: 13px;
   color: #5f6368;
 }
 
-.col-dates {
+.col-phone {
   font-size: 13px;
   color: #5f6368;
 }
 
 /* ── Detail panel ─────────────────────────────── */
 
-.artist-detail-panel {
-  width: 360px;
-  min-width: 360px;
+.contact-detail-panel {
+  width: 320px;
+  min-width: 320px;
   border-left: 1px solid #e0e0e0;
   padding: 24px;
   position: sticky;
@@ -159,101 +197,111 @@
   color: #202124;
 }
 
-.artist-detail-info {
+/* Large avatar in detail panel */
+.contact-detail-avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  clear: both;
+}
+
+.contact-detail-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-detail-info {
+  text-align: center;
   margin-bottom: 24px;
 }
 
-.artist-detail-name {
+.contact-detail-name {
   font-size: 18px;
   font-weight: 500;
   color: #202124;
   margin: 0 0 6px 0;
 }
 
-.artist-detail-meta {
+.contact-detail-type {
   font-size: 13px;
-  color: #5f6368;
-  margin: 0 0 12px 0;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
-.artist-detail-biography {
-  font-size: 13px;
-  color: #202124;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* Works section */
-.artist-detail-section {
+/* Detail sections */
+.contact-detail-section {
   border-top: 1px solid #e0e0e0;
-  padding-top: 16px;
+  padding: 16px 0;
 }
 
-.artist-detail-section-label {
+.contact-detail-section-label {
   font-size: 11px;
   letter-spacing: 1px;
   color: #5f6368;
   margin: 0 0 12px 0;
 }
 
-.artist-detail-loading,
-.artist-detail-empty {
-  font-size: 13px;
-  color: #9aa0a6;
-  margin: 0;
-}
-
-/* Artwork row in detail panel */
-.artist-artwork-row {
+.contact-detail-row {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
   gap: 12px;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid #f1f3f4;
 }
 
-.artist-artwork-row:last-child {
-  border-bottom: none;
-}
-
-.artist-artwork-thumb {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  overflow: hidden;
-  background-color: #f1f3f4;
-  border-radius: 2px;
-}
-
-.artist-artwork-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.artist-artwork-thumb-placeholder {
-  width: 100%;
-  height: 100%;
-  background-color: #f1f3f4;
-}
-
-.artist-artwork-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.artist-artwork-title {
-  font-size: 13px;
-  color: #202124;
-  margin: 0;
-}
-
-.artist-artwork-medium {
+.contact-detail-label {
   font-size: 12px;
   color: #5f6368;
+  flex-shrink: 0;
+}
+
+.contact-detail-value {
+  font-size: 13px;
+  color: #202124;
+  text-align: right;
+}
+
+.contact-detail-link {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.contact-detail-link:hover {
+  text-decoration: underline;
+}
+
+.contact-detail-notes {
+  font-size: 13px;
+  color: #5f6368;
+  line-height: 1.6;
   margin: 0;
+  font-style: italic;
+}
+
+/* Edit button */
+.contact-edit-button {
+  width: 100%;
+  height: 36px;
+  margin-top: 16px;
+  background-color: #ffffff;
+  border: 1px solid #202124;
+  border-radius: 4px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #202124;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+.contact-edit-button:hover {
+  background-color: #f1f3f4;
 }
 
 /* ── Skeleton ─────────────────────────────────── */
@@ -272,11 +320,17 @@
 
 .skeleton-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  padding: 12px 16px;
+  grid-template-columns: 48px 2fr 1fr 2fr 1.5fr;
+  padding: 10px 16px;
   border-bottom: 1px solid #f1f3f4;
   gap: 16px;
   align-items: center;
+}
+
+.skeleton-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }
 
 .skeleton-name {
@@ -284,29 +338,15 @@
   width: 70%;
 }
 
-.skeleton-nationality {
+.skeleton-type {
   height: 13px;
   width: 60%;
 }
 
-.skeleton-dates {
+.skeleton-email {
   height: 13px;
-  width: 50%;
+  width: 80%;
 }
-
-/* ── Status dots ──────────────────────────────── */
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.status-available { background-color: #34a853; }
-.status-sold      { background-color: #ea4335; }
-.status-reserved  { background-color: #fbbc04; }
-.status-on-loan  { background-color: #9334e6; }
 
 /* ── Status message ───────────────────────────── */
 
