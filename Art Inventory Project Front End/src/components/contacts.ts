@@ -1,5 +1,5 @@
 import axiosInstance from './axiosInstance';
-import type { Contact } from '../types/contact';
+import type { Contact } from '../types/contacts';
 
 // Get a list of all contacts
 export const getContacts = () =>

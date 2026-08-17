@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';import { getContacts } from './contacts';
-import type { Contact } from '../types/contact';
+import type { Contact } from '../types/contacts';
 import './ContactsPage.css';
 
 // Colour coded badge for each contact type
@@ -217,7 +217,7 @@ const ContactsPage = () => {
 
               <div className="contact-detail-row">
                 <span className="contact-detail-label">Email</span>
-                
+                <a
                   href={`mailto:${selectedContact.email}`}
                   className="contact-detail-value contact-detail-link"
                 >
@@ -245,9 +245,8 @@ const ContactsPage = () => {
 
           </div>
         )}
-
+        </div>
       </div>
-    </div>
   );
 };
 
