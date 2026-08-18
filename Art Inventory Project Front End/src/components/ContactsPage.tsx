@@ -21,6 +21,9 @@ const ContactsPage = () => {
   // The contact currently shown in the detail panel
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
+  
+  
+
   // Filter contacts by search query and type
   const filteredContacts = contacts.filter((contact) => {
     const matchesType =

@@ -8,3 +8,7 @@ export const getContacts = () =>
 // Get a single contact by their ID
 export const getContact = (id: number) =>
   axiosInstance.get<{ contact: Contact }>(`/contacts/${id}`);
+
+// Create a new contact
+export const createContact = (data: Omit<Contact, 'contact_id' | 'notes'>) =>
+  axiosInstance.post<{ contact: Contact }>('/contacts', data);
