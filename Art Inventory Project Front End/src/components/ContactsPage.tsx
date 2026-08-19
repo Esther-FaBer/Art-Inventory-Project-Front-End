@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react';import { getContacts } from './contacts';
+import { useState, useEffect } from 'react';
+import { getContacts } from './contacts';
 import type { Contact } from '../types/contacts';
+import AddContactModal from './AddContactModal';
 import './ContactsPage.css';
+
 
 // Colour coded badge for each contact type
 const TYPE_COLOURS: Record<string, string> = {
@@ -17,12 +20,10 @@ const ContactsPage = () => {
   const [selectedType, setSelectedType] = useState('all');
   const [isLoading, setIsLoading]     = useState(true);
   const [hasErrored, setHasErrored]   = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
 
   // The contact currently shown in the detail panel
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
-
-  
-  
 
   // Filter contacts by search query and type
   const filteredContacts = contacts.filter((contact) => {
@@ -64,6 +65,12 @@ const ContactsPage = () => {
 
   const handleClosePanel = () => {
     setSelectedContact(null);
+  };
+
+  // Called by AddContactModal when a contact is saved successfully
+  const handleContactAdded = (newContact: Contact) => {
+    setContacts([...contacts, newContact]);
+    setShowAddForm(false);
   };
 
   // Format contact type for display — replaces underscores with spaces
@@ -248,7 +255,15 @@ const ContactsPage = () => {
 
           </div>
         )}
+
         </div>
+
+         {showAddForm && (
+            <AddContactModal
+              onClose={() => setShowAddForm(false)}
+              onSave={handleContactAdded}
+            />
+        )}
       </div>
   );
 };
