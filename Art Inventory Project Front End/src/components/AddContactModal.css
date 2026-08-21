@@ -129,3 +129,9 @@
   background-color: #9aa0a6;
   cursor: not-allowed;
 }
+
+.modal-textarea {
+  height: 80px;
+  padding: 8px 12px;
+  resize: vertical;
+}

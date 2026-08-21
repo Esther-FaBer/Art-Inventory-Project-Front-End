@@ -66,6 +66,15 @@ const AddContactModal = ({ onClose, onSave }: Props) => {
     e.stopPropagation();
   };
 
+  // Called by EditContactModal when a contact is updated successfully
+const handleContactUpdated = (updatedContact: Contact) => {
+  setContacts(contacts.map((c) =>
+    c.contact_id === updatedContact.contact_id ? updatedContact : c
+  ));
+  setSelectedContact(updatedContact);
+  setShowEditForm(false);
+};
+
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal" onClick={handleModalClick}>

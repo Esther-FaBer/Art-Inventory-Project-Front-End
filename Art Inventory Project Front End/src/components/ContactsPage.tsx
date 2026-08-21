@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getContacts } from './contacts';
 import type { Contact } from '../types/contacts';
 import AddContactModal from './AddContactModal';
+import EditContactModal from './EditContactModal';
 import './ContactsPage.css';
 
 
@@ -21,6 +22,7 @@ const ContactsPage = () => {
   const [isLoading, setIsLoading]     = useState(true);
   const [hasErrored, setHasErrored]   = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
 
   // The contact currently shown in the detail panel
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
