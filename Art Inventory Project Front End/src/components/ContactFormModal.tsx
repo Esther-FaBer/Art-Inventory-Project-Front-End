@@ -1,32 +1,37 @@
 import { useState } from 'react';
-import { createContact } from './contacts';
+import { createContact, updateContact } from './contacts';
 import type { Contact } from '../types/contacts';
-import './AddContactModal.css';
+import './ContactFormModal.css';
 
 type Props = {
+  // Whether we are adding a new contact or editing an existing one
+  mode: 'add' | 'edit';
+  // Only required when mode is "edit" — the contact to pre-fill the form with
+  contact?: Contact;
   // Called when the user cancels or closes the modal
   onClose: () => void;
-  // Called with the new contact when save is successful
-  onSave: (newContact: Contact) => void;
+  // Called with the saved contact when the operation is successful
+  onSave: (contact: Contact) => void;
 };
 
-const AddContactModal = ({ onClose, onSave }: Props) => {
+const ContactFormModal = ({ mode, contact, onClose, onSave }: Props) => {
 
-  // Form field values
-  const [contactName, setContactName]   = useState('');
-  const [email, setEmail]               = useState('');
-  const [phoneNumber, setPhoneNumber]   = useState('');
-  const [contactType, setContactType]   = useState('collector');
+  // Pre-fill with existing values when editing, start empty when adding
+  const [contactName, setContactName] = useState(contact?.contact_name || '');
+  const [email, setEmail] = useState(contact?.email || '');
+  const [phoneNumber, setPhoneNumber] = useState(contact?.phone_number || '');
+  const [contactType, setContactType] = useState(contact?.contact_type || 'collector');
+  const [notes, setNotes] = useState(contact?.notes || '');
 
   // UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError]               = useState('');
+  const [error, setError] = useState('');
 
-  // Called when the user clicks Save
+  // Called when the user clicks Save or Update
   const handleSave = () => {
     setError('');
 
-    // Basic validation - name and email are required
+    // Validation — name and email are always required
     if (!contactName.trim()) {
       setError('Name is required.');
       return;
@@ -38,14 +43,22 @@ const AddContactModal = ({ onClose, onSave }: Props) => {
 
     setIsSubmitting(true);
 
-    createContact({
+    // Build the data object to send to the API
+    const contactData = {
       contact_name: contactName,
       email,
       phone_number: phoneNumber,
       contact_type: contactType,
-    })
+      notes,
+    };
+
+    // Choose the right API call based on the mode
+    const apiCall = mode === 'add'
+      ? createContact(contactData)
+      : updateContact(contact!.contact_id, contactData);
+
+    apiCall
       .then((response) => {
-        // Tell the parent the save was successful
         onSave(response.data.contact);
       })
       .catch(() => {
@@ -56,7 +69,7 @@ const AddContactModal = ({ onClose, onSave }: Props) => {
       });
   };
 
-  // Close the modal when clicking the dark overlay behind it
+  // Close when clicking the dark overlay behind the modal
   const handleOverlayClick = () => {
     onClose();
   };
@@ -66,22 +79,15 @@ const AddContactModal = ({ onClose, onSave }: Props) => {
     e.stopPropagation();
   };
 
-  // Called by EditContactModal when a contact is updated successfully
-const handleContactUpdated = (updatedContact: Contact) => {
-  setContacts(contacts.map((c) =>
-    c.contact_id === updatedContact.contact_id ? updatedContact : c
-  ));
-  setSelectedContact(updatedContact);
-  setShowEditForm(false);
-};
-
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal" onClick={handleModalClick}>
 
-        {/* Modal header */}
+        {/* Modal header - title changes based on mode */}
         <div className="modal-header">
-          <h2 className="modal-title">New Contact</h2>
+          <h2 className="modal-title">
+            {mode === 'add' ? 'New Contact' : 'Edit Contact'}
+          </h2>
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
 
@@ -136,6 +142,17 @@ const handleContactUpdated = (updatedContact: Contact) => {
           </select>
         </div>
 
+        {/* Notes field - shown in both modes */}
+        <div className="modal-field">
+          <label className="modal-label">Notes</label>
+          <textarea
+            className="modal-input modal-textarea"
+            placeholder="Add notes about this contact..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+        </div>
+
         {/* Error message */}
         {error && <p className="modal-error">{error}</p>}
 
@@ -149,7 +166,10 @@ const handleContactUpdated = (updatedContact: Contact) => {
             onClick={handleSave}
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Saving...' : 'Save Contact'}
+            {isSubmitting
+              ? 'Saving...'
+              : mode === 'add' ? 'Save Contact' : 'Update Contact'
+            }
           </button>
         </div>
 
@@ -158,4 +178,4 @@ const handleContactUpdated = (updatedContact: Contact) => {
   );
 };
 
-export default AddContactModal;
+export default ContactFormModal;

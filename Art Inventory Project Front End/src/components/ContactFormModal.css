@@ -1,4 +1,3 @@
-/* AddContactModal.css */
 
 /* Dark overlay behind the modal */
 .modal-overlay {
@@ -78,6 +77,13 @@
   box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
 }
 
+/* Textarea for notes */
+.modal-textarea {
+  height: 80px;
+  padding: 8px 12px;
+  resize: vertical;
+}
+
 /* Error message */
 .modal-error {
   font-size: 13px;
@@ -128,10 +134,4 @@
 .modal-submit:disabled {
   background-color: #9aa0a6;
   cursor: not-allowed;
-}
-
-.modal-textarea {
-  height: 80px;
-  padding: 8px 12px;
-  resize: vertical;
 }

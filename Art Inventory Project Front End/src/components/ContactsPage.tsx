@@ -1,26 +1,24 @@
 import { useState, useEffect } from 'react';
 import { getContacts } from './contacts';
 import type { Contact } from '../types/contacts';
-import AddContactModal from './AddContactModal';
-import EditContactModal from './EditContactModal';
+import ContactFormModal from './ContactFormModal';
 import './ContactsPage.css';
-
 
 // Colour coded badge for each contact type
 const TYPE_COLOURS: Record<string, string> = {
-  collector:    '#1a73e8',
-  dealer:       '#34a853',
-  institution:  '#9334e6',
+  collector:     '#1a73e8',
+  dealer:        '#34a853',
+  institution:   '#9334e6',
   auction_house: '#ea4335',
 };
 
 const ContactsPage = () => {
 
-  const [contacts, setContacts]       = useState<Contact[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [searchQuery, setSearchQuery]  = useState('');
   const [selectedType, setSelectedType] = useState('all');
-  const [isLoading, setIsLoading]     = useState(true);
-  const [hasErrored, setHasErrored]   = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasErrored, setHasErrored] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
 
@@ -69,10 +67,19 @@ const ContactsPage = () => {
     setSelectedContact(null);
   };
 
-  // Called by AddContactModal when a contact is saved successfully
+  // Called by ContactFormModal in add mode when a contact is saved successfully
   const handleContactAdded = (newContact: Contact) => {
     setContacts([...contacts, newContact]);
     setShowAddForm(false);
+  };
+
+  // Called by ContactFormModal in edit mode when a contact is updated successfully
+  const handleContactUpdated = (updatedContact: Contact) => {
+    setContacts(contacts.map((c) =>
+      c.contact_id === updatedContact.contact_id ? updatedContact : c
+    ));
+    setSelectedContact(updatedContact);
+    setShowEditForm(false);
   };
 
   // Format contact type for display — replaces underscores with spaces
@@ -80,7 +87,7 @@ const ContactsPage = () => {
     return type.replace('_', ' ');
   };
 
-  // Returns the first letter of each word for the avatar
+  // Returns the first two initials of the contact name
   const getInitials = (name: string) => {
     return name
       .split(' ')
@@ -121,6 +128,9 @@ const ContactsPage = () => {
       <div className="contacts-header">
         <h1>CONTACTS</h1>
         <p className="contacts-count">{filteredContacts.length} contacts</p>
+        <button className="add-contact-button" onClick={() => setShowAddForm(true)}>
+          + Add Contact
+        </button>
       </div>
 
       {/* Search and filter controls */}
@@ -169,7 +179,6 @@ const ContactsPage = () => {
               className={`contact-row ${selectedContact?.contact_id === contact.contact_id ? 'contact-row-active' : ''}`}
               onClick={() => handleContactClick(contact)}
             >
-              {/* Avatar with initials */}
               <div
                 className="contact-avatar"
                 style={{ backgroundColor: TYPE_COLOURS[contact.contact_type] || '#5f6368' }}
@@ -179,7 +188,6 @@ const ContactsPage = () => {
 
               <span className="col-name">{contact.contact_name}</span>
 
-              {/* Type badge */}
               <span className="col-type">
                 <span
                   className="contact-type-badge"
@@ -202,7 +210,6 @@ const ContactsPage = () => {
 
             <button className="detail-panel-close" onClick={handleClosePanel}>✕</button>
 
-            {/* Avatar */}
             <div className="contact-detail-avatar-wrapper">
               <div
                 className="contact-detail-avatar"
@@ -212,7 +219,6 @@ const ContactsPage = () => {
               </div>
             </div>
 
-            {/* Contact info */}
             <div className="contact-detail-info">
               <h2 className="contact-detail-name">{selectedContact.contact_name}</h2>
               <span
@@ -223,14 +229,13 @@ const ContactsPage = () => {
               </span>
             </div>
 
-            {/* Contact details */}
             <div className="contact-detail-section">
               <p className="contact-detail-section-label">CONTACT DETAILS</p>
 
               <div className="contact-detail-row">
                 <span className="contact-detail-label">Email</span>
-                <a
-                  href={`mailto:${selectedContact.email}`}
+                
+                  <a href={`mailto:${selectedContact.email}`}
                   className="contact-detail-value contact-detail-link"
                 >
                   {selectedContact.email}
@@ -244,7 +249,6 @@ const ContactsPage = () => {
 
             </div>
 
-            {/* Notes section */}
             <div className="contact-detail-section">
               <p className="contact-detail-section-label">NOTES</p>
               <p className="contact-detail-notes">
@@ -252,21 +256,39 @@ const ContactsPage = () => {
               </p>
             </div>
 
-            {/* Edit button */}
-            <button className="contact-edit-button">EDIT</button>
+            {/* Edit button - opens ContactFormModal in edit mode */}
+            <button
+              className="contact-edit-button"
+              onClick={() => setShowEditForm(true)}
+            >
+              EDIT
+            </button>
 
           </div>
         )}
 
-        </div>
-
-         {showAddForm && (
-            <AddContactModal
-              onClose={() => setShowAddForm(false)}
-              onSave={handleContactAdded}
-            />
-        )}
       </div>
+
+      {/* Add contact modal */}
+      {showAddForm && (
+        <ContactFormModal
+          mode="add"
+          onClose={() => setShowAddForm(false)}
+          onSave={handleContactAdded}
+        />
+      )}
+
+      {/* Edit contact modal - only renders when a contact is selected */}
+      {showEditForm && selectedContact && (
+        <ContactFormModal
+          mode="edit"
+          contact={selectedContact}
+          onClose={() => setShowEditForm(false)}
+          onSave={handleContactUpdated}
+        />
+      )}
+
+    </div>
   );
 };
 
