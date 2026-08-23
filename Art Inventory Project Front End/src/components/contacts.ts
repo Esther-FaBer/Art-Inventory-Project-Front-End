@@ -16,3 +16,7 @@ export const createContact = (data: Omit<Contact, 'contact_id' | 'notes'>) =>
 // Update an existing contact by their ID
 export const updateContact = (id: number, data: Partial<Omit<Contact, 'contact_id'>>) =>
   axiosInstance.put<{ contact: Contact }>(`/contacts/${id}`, data);
+
+// Delete a contact by their ID
+export const deleteContact = (id: number) =>
+  axiosInstance.delete(`/contacts/${id}`);

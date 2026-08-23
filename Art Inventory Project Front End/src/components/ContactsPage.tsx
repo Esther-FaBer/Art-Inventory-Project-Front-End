@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getContacts } from './contacts';
+import { getContacts, deleteContact } from './contacts';
 import type { Contact } from '../types/contacts';
 import ContactFormModal from './ContactFormModal';
+import DeleteConfirmModal from './DeleteConfirmModal';
 import './ContactsPage.css';
 
 // Colour coded badge for each contact type
@@ -21,6 +22,7 @@ const ContactsPage = () => {
   const [hasErrored, setHasErrored] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   // The contact currently shown in the detail panel
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
@@ -80,6 +82,24 @@ const ContactsPage = () => {
     ));
     setSelectedContact(updatedContact);
     setShowEditForm(false);
+  };
+
+  // Called when the user confirms the delete
+  const handleContactDeleted = () => {
+    if (!selectedContact) return;
+
+    deleteContact(selectedContact.contact_id)
+      .then(() => {
+        setContacts(contacts.filter((c) =>
+          c.contact_id !== selectedContact.contact_id
+        ));
+        setSelectedContact(null);
+        setShowDeleteConfirm(false);
+      })
+      .catch(() => {
+        setShowDeleteConfirm(false);
+        alert('Could not delete contact. Please try again.');
+      });
   };
 
   // Format contact type for display — replaces underscores with spaces
@@ -234,8 +254,7 @@ const ContactsPage = () => {
 
               <div className="contact-detail-row">
                 <span className="contact-detail-label">Email</span>
-                
-                  <a href={`mailto:${selectedContact.email}`}
+                <a href={`mailto:${selectedContact.email}`}
                   className="contact-detail-value contact-detail-link"
                 >
                   {selectedContact.email}
@@ -264,6 +283,14 @@ const ContactsPage = () => {
               EDIT
             </button>
 
+            {/* Delete button */}
+            <button
+              className="contact-delete-button"
+              onClick={() => setShowDeleteConfirm(true)}
+            >
+              DELETE
+            </button>
+
           </div>
         )}
 
@@ -288,8 +315,16 @@ const ContactsPage = () => {
         />
       )}
 
+      {/* Delete confirmation modal */}
+      {showDeleteConfirm && selectedContact && (
+        <DeleteConfirmModal
+          contactName={selectedContact.contact_name}
+          onClose={() => setShowDeleteConfirm(false)}
+          onConfirm={handleContactDeleted}
+        />
+      )}
     </div>
-  );
+);
 };
 
 export default ContactsPage;
