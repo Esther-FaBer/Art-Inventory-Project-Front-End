@@ -3,7 +3,7 @@
 .artworks-page {
   padding: 24px 32px;
   font-family: Arial, sans-serif;
-  background-color: #ffffff;
+  background-color: var(--color-background);
   min-height: 100vh;
 }
 
@@ -20,13 +20,13 @@
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 2px;
-  color: #202124;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
 .artworks-count {
   font-size: 13px;
-  color: #9aa0a6;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -44,8 +44,8 @@
   height: 36px;
   padding: 0 12px;
   font-size: 13px;
-  color: #202124;
-  background-color: #f1f3f4;
+  color: var(--color-text-primary);
+  background-color: var(--color-border-light);
   border: 1px solid transparent;
   border-radius: 4px;
   outline: none;
@@ -62,8 +62,8 @@
 
 .input-group input:focus,
 .input-group select:focus {
-  background-color: #ffffff;
-  border-color: #1a73e8;
+  background-color: var(--color-background);
+  border-color: var(--color-accent);
 }
 
 /* ── Content area - grid + panel ─────────────── */
@@ -93,19 +93,19 @@
 
 .artwork-card {
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: var(--color-background);
   border: 1px solid transparent;
   border-radius: 2px;
   transition: border-color 0.2s;
 }
 
 .artwork-card:hover {
-  border-color: #e0e0e0;
+  border-color: var(--color-border);
 }
 
 /* Highlighted card when selected */
 .artwork-card-active {
-  border-color: #202124;
+  border-color: var(--color-text-primary);
 }
 
 /* ── Artwork image ─────────────────────────────── */
@@ -114,7 +114,7 @@
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background-color: #f1f3f4;
+  background-color: var(--color-border-light);
   margin-bottom: 8px;
 }
 
@@ -130,8 +130,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f1f3f4;
-  color: #9aa0a6;
+  background-color: var(--color-border-light);
+  color: var(--color-text-muted)6;
   font-size: 12px;
 }
 
@@ -144,25 +144,25 @@
 .artwork-artist {
   font-size: 13px;
   font-weight: bold;
-  color: #202124;
+  color: var(--color-text-primary);
   margin: 0 0 2px 0;
 }
 
 .artwork-title {
   font-size: 13px;
-  color: #202124;
+  color: var(--color-text-primary);
   margin: 0 0 2px 0;
 }
 
 .artwork-dimensions {
   font-size: 12px;
-  color: #5f6368;
+  color: var(--color-text-secondary);
   margin: 0 0 2px 0;
 }
 
 .artwork-medium {
   font-size: 12px;
-  color: #5f6368;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -181,30 +181,30 @@
   display: inline-block;
 }
 
-.status-available { background-color: #34a853; }
-.status-sold      { background-color: #ea4335; }
-.status-reserved  { background-color: #fbbc04; }
-.status-on-loan  { background-color: #9334e6; }
+.status-available { background-color: var(--color-success); }
+.status-sold      { background-color: var(--color-error); }
+.status-reserved  { background-color: var(--color-warning); }
+.status-on-loan  { background-color: var(--color-purple); }
 
 /* ── Detail panel ─────────────────────────────── */
 
 .detail-panel {
   width: 320px;
   min-width: 320px;
-  border-left: 1px solid #e0e0e0;
+  border-left: 1px solid var(--color-border);
   padding: 24px;
   position: sticky;
   top: 64px;
   max-height: calc(100vh - 64px);
   overflow-y: auto;
-  background-color: #ffffff;
+  background-color: var(--color-background);
 }
 
 .detail-panel-close {
   background: none;
   border: none;
   font-size: 16px;
-  color: #5f6368;
+  color: var(--color-text-secondary);
   cursor: pointer;
   float: right;
   padding: 0;
@@ -212,7 +212,7 @@
 }
 
 .detail-panel-close:hover {
-  color: #202124;
+  color: var(--color-text-primary);
 }
 
 /* Detail image */
@@ -220,7 +220,7 @@
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background-color: #f1f3f4;
+  background-color: var(--color-border-light);
   margin-bottom: 16px;
 }
 
@@ -236,7 +236,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9aa0a6;
+  color: var(--color-text-muted);
   font-size: 13px;
 }
 
@@ -248,31 +248,31 @@
 .detail-artist {
   font-size: 14px;
   font-weight: bold;
-  color: #202124;
+  color: var(--color-text-primary);
   margin: 0 0 2px 0;
 }
 
 .detail-title {
   font-size: 13px;
-  color: #202124;
+  color: var(--color-text-primary);
   margin: 0 0 4px 0;
 }
 
 .detail-medium {
   font-size: 12px;
-  color: #5f6368;
+  color: var(--color-text-secondary);
   margin: 0 0 2px 0;
 }
 
 .detail-dimensions {
   font-size: 12px;
-  color: #5f6368;
+  color: var(--color-text-secondary)8;
   margin: 0;
 }
 
 /* Detail sections */
 .detail-section {
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--color-border);
   padding: 12px 0;
   margin-bottom: 4px;
 }
@@ -280,7 +280,7 @@
 .detail-section-label {
   font-size: 11px;
   letter-spacing: 1px;
-  color: #5f6368;
+  color: var(--color-text-secondary);
   margin: 0 0 8px 0;
 }
 
@@ -292,7 +292,7 @@
 
 .detail-status-text {
   font-size: 13px;
-  color: #202124;
+  color: var(--color-text-primary);
   text-transform: capitalize;
 }
 
@@ -305,12 +305,12 @@
 
 .detail-price-label {
   font-size: 12px;
-  color: #5f6368;
+  color: var(--color-text-secondary)8;
 }
 
 .detail-price-value {
   font-size: 13px;
-  color: #202124;
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
@@ -319,24 +319,24 @@
   width: 100%;
   height: 36px;
   margin-top: 16px;
-  background-color: #ffffff;
-  border: 1px solid #202124;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-text-primary);
   border-radius: 4px;
   font-size: 12px;
   letter-spacing: 1px;
-  color: #202124;
+  color: var(--color-text-primary);
   cursor: pointer;
   font-family: Arial, sans-serif;
 }
 
 .detail-edit-button:hover {
-  background-color: #f1f3f4;
+  background-color: var(--color-surface-hover);
 }
 
 /* ── Skeleton ─────────────────────────────────── */
 
 .skeleton {
-  background-color: #e0e0e0;
+  background-color: var(--color-border);
   border-radius: 4px;
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
@@ -375,11 +375,11 @@
 
 .status-message {
   font-size: 14px;
-  color: #5f6368;
+  color: var(--color-text-secondary);
   text-align: center;
   margin-top: 60px;
 }
 
 .status-message.error {
-  color: #ea4335;
+  color: var(--color-error);
 }
