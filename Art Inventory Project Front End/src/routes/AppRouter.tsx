@@ -3,8 +3,9 @@ import Layout from '../components/Layout';
 import ArtworksPage from '../components/ArtworksPage';
 import ArtistsPage from '../components/ArtistsPage';
 import ContactsPage from '../components/ContactsPage';
+import SalesPage from '../components/SalesPage';
 
-const SalesPage    = () => <div>Sales page coming soon</div>;
+<Route path="/sales" element={<Layout><SalesPage /></Layout>} />
 const NotFound     = () => <div>404 - Page not found</div>;
 
 const AppRouter = () => {

@@ -1,0 +1,375 @@
+/* SalesPage.css */
+
+.sales-page {
+  padding: 24px 32px;
+  font-family: Arial, sans-serif;
+  background-color: var(--color-background);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ── Header ───────────────────────────────────── */
+
+.sales-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sales-header h1 {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.sales-count {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ── Kanban board ─────────────────────────────── */
+
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ── Kanban column ────────────────────────────── */
+
+.kanban-column {
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 200px;
+}
+
+/* Column header */
+.kanban-column-header {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.kanban-column-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.kanban-column-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kanban-column-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  flex: 1;
+}
+
+.kanban-column-count {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  background-color: var(--color-border);
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
+.kanban-column-value {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 0;
+  padding-left: 18px;
+}
+
+/* ── Kanban cards ─────────────────────────────── */
+
+.kanban-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kanban-empty {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 20px 0;
+  font-style: italic;
+}
+
+/* Individual card */
+.kanban-card {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.kanban-card:hover {
+  box-shadow: 0 2px 8px var(--color-shadow, rgba(0,0,0,0.1));
+}
+
+.kanban-card-active {
+  border-color: var(--color-text-primary);
+}
+
+/* Card image */
+.kanban-card-image {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+.kanban-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kanban-card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* Card body */
+.kanban-card-body {
+  padding: 10px 12px 8px;
+}
+
+.kanban-card-artist {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  margin: 0 0 2px 0;
+}
+
+.kanban-card-title {
+  font-size: 12px;
+  color: var(--color-text-primary);
+  margin: 0 0 6px 0;
+}
+
+.kanban-card-price {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+/* Card footer */
+.kanban-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 10px;
+}
+
+.kanban-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kanban-card-medium {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Detail panel ─────────────────────────────── */
+
+.sales-detail-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100vh;
+  background-color: var(--color-background);
+  border-left: 1px solid var(--color-border);
+  padding: 24px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: -4px 0 12px var(--color-shadow, rgba(0,0,0,0.1));
+}
+
+.detail-panel-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  float: right;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.detail-panel-close:hover {
+  color: var(--color-text-primary);
+}
+
+.sales-detail-image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--color-surface);
+  margin-bottom: 16px;
+  clear: both;
+}
+
+.sales-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sales-detail-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.sales-detail-info {
+  margin-bottom: 16px;
+}
+
+.sales-detail-artist {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  margin: 0 0 4px 0;
+}
+
+.sales-detail-title {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  margin: 0 0 4px 0;
+}
+
+.sales-detail-medium {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.sales-detail-section {
+  border-top: 1px solid var(--color-border);
+  padding: 12px 0;
+}
+
+.sales-detail-section-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--color-text-secondary);
+  margin: 0 0 8px 0;
+}
+
+.sales-detail-price {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0 0 4px 0;
+}
+
+.sales-detail-vat {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.sales-detail-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sales-detail-status-text {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  text-transform: capitalize;
+}
+
+/* ── Skeleton ─────────────────────────────────── */
+
+.skeleton {
+  background-color: var(--color-border);
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.skeleton-card {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
+.skeleton-col-title {
+  height: 14px;
+  width: 60%;
+  margin-bottom: 8px;
+}
+
+.skeleton-card-image {
+  width: 100%;
+  height: 140px;
+  border-radius: 0;
+  margin-bottom: 10px;
+}
+
+.skeleton-card-title {
+  height: 12px;
+  width: 80%;
+  margin: 0 12px 6px;
+}
+
+.skeleton-card-artist {
+  height: 12px;
+  width: 60%;
+  margin: 0 12px;
+}
+
+/* ── Status message ───────────────────────────── */
+
+.status-message {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-top: 60px;
+}
+
+.status-message.error {
+  color: var(--color-error);
+}
