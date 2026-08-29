@@ -398,3 +398,14 @@
 .contact-delete-button:hover {
   background-color: var(--color-error-light);
 }
+
+/* Sortable column headers */
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.sortable:hover {
+  color: var(--color-text-primary);
+}

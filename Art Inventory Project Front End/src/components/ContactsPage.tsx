@@ -7,10 +7,10 @@ import './ContactsPage.css';
 
 // Colour coded badge for each contact type
 const TYPE_COLOURS: Record<string, string> = {
-  collector:     '#1a73e8',
-  dealer:        '#34a853',
-  institution:   '#9334e6',
-  auction_house: '#ea4335',
+  collector: '#1a73e8',
+  dealer: '#34a853',
+  institution: '#9334e6',
+  auction_house:'#ea4335',
 };
 
 const ContactsPage = () => {
@@ -23,6 +23,8 @@ const ContactsPage = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [sortColumn, setSortColumn] = useState<'contact_name' | 'contact_type' | 'email'>('contact_name');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
   // The contact currently shown in the detail panel
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
@@ -37,6 +39,32 @@ const ContactsPage = () => {
       contact.email.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesType && matchesSearch;
   });
+
+  // Called when the user clicks a column header
+const handleSort = (column: 'contact_name' | 'contact_type' | 'email') => {
+  if (sortColumn === column) {
+    // If already sorting by this column, flip the direction
+    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+  } else {
+    // Otherwise sort by the new column starting ascending
+    setSortColumn(column);
+    setSortDirection('asc');
+  }
+};
+
+// Returns the sort arrow for a column header
+const getSortIcon = (column: string) => {
+  if (sortColumn !== column) return ' ↕';
+  return sortDirection === 'asc' ? ' ↑' : ' ↓';
+};
+
+// Sort the filtered contacts by the selected column
+const sortedContacts = [...filteredContacts].sort((a, b) => {
+  const valueA = a[sortColumn].toLowerCase();
+  const valueB = b[sortColumn].toLowerCase();
+  const comparison = valueA.localeCompare(valueB);
+  return sortDirection === 'asc' ? comparison : -comparison;
+});
 
   // Fetch all contacts when the page first loads
   useEffect(() => {
@@ -180,12 +208,18 @@ const ContactsPage = () => {
         {/* Contacts list */}
         <div className={`contacts-list ${selectedContact ? 'list-with-panel' : ''}`}>
 
-          {/* Column headers */}
+          {/* Column headers - click to sort */}
           <div className="contact-list-header">
             <span className="col-avatar"></span>
-            <span className="col-name">Name</span>
-            <span className="col-type">Type</span>
-            <span className="col-email">Email</span>
+            <span className="col-name sortable" onClick={() => handleSort('contact_name')}>
+              Name{getSortIcon('contact_name')}
+            </span>
+            <span className="col-type sortable" onClick={() => handleSort('contact_type')}>
+              Type{getSortIcon('contact_type')}
+            </span>
+            <span className="col-email sortable" onClick={() => handleSort('email')}>
+              Email{getSortIcon('email')}
+            </span>
             <span className="col-phone">Phone</span>
           </div>
 
@@ -193,7 +227,7 @@ const ContactsPage = () => {
             <p className="status-message">No contacts match your search.</p>
           )}
 
-          {filteredContacts.map((contact) => (
+          {sortedContacts.map((contact) => (
             <div
               key={contact.contact_id}
               className={`contact-row ${selectedContact?.contact_id === contact.contact_id ? 'contact-row-active' : ''}`}
