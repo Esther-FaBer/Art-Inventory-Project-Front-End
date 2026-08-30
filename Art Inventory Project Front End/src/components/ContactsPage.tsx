@@ -3,6 +3,7 @@ import { getContacts, deleteContact } from './contacts';
 import type { Contact } from '../types/contacts';
 import ContactFormModal from './ContactFormModal';
 import DeleteConfirmModal from './DeleteConfirmModal';
+import { useToast } from '../context/ToastContext';
 import './ContactsPage.css';
 
 // Colour coded badge for each contact type

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createContact, updateContact } from './contacts';
 import type { Contact } from '../types/contacts';
+import { useToast } from '../context/ToastContext';
 import './ContactFormModal.css';
 
 type Props = {

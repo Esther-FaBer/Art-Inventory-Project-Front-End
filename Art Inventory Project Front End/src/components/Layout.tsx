@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import Header from './Header';
+import Toast from './Toast';
 import './Layout.css';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -43,6 +44,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <p className="footer-copy">© {new Date().getFullYear()} ArtDB. All rights reserved.</p>
         </div>
       </footer>
+
+      <Toast />
 
     </div>
   );
