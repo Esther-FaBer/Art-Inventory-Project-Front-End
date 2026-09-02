@@ -30,6 +30,9 @@ const ContactsPage = () => {
   // The contact currently shown in the detail panel
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
+  // Toast
+  const { toast } = useToast(); 
+
   // Filter contacts by search query and type
   const filteredContacts = contacts.filter((contact) => {
     const matchesType =
@@ -40,6 +43,24 @@ const ContactsPage = () => {
       contact.email.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesType && matchesSearch;
   });
+      
+  
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedType(e.target.value);
+    setSelectedContact(null);
+  };
+
+  const handleContactClick = (contact: Contact) => {
+    setSelectedContact(contact);
+  };
+
+  const handleClosePanel = () => {
+    setSelectedContact(null);
+  };
 
   // Called when the user clicks a column header
 const handleSort = (column: 'contact_name' | 'contact_type' | 'email') => {
@@ -81,22 +102,7 @@ const sortedContacts = [...filteredContacts].sort((a, b) => {
       });
   }, []);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(e.target.value);
-    setSelectedContact(null);
-  };
-
-  const handleContactClick = (contact: Contact) => {
-    setSelectedContact(contact);
-  };
-
-  const handleClosePanel = () => {
-    setSelectedContact(null);
-  };
+  
 
   // Called by ContactFormModal in add mode when a contact is saved successfully
   const handleContactAdded = (newContact: Contact) => {
