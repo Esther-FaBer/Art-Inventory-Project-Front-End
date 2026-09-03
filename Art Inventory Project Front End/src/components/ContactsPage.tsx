@@ -14,6 +14,8 @@ const TYPE_COLOURS: Record<string, string> = {
   auction_house:'#ea4335',
 };
 
+
+// State declarations
 const ContactsPage = () => {
 
   const [contacts, setContacts] = useState<Contact[]>([]);
@@ -26,12 +28,12 @@ const ContactsPage = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [sortColumn, setSortColumn] = useState<'contact_name' | 'contact_type' | 'email'>('contact_name');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-
-  // The contact currently shown in the detail panel
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
-  // Toast
+  // Toast hook
   const { toast } = useToast(); 
+
+  // Derived Values
 
   // Filter contacts by search query and type
   const filteredContacts = contacts.filter((contact) => {
@@ -44,7 +46,32 @@ const ContactsPage = () => {
     return matchesType && matchesSearch;
   });
       
-  
+  // Sort the filtered contacts by the selected column
+  const sortedContacts = [...filteredContacts].sort((a, b) => {
+    const valueA = a[sortColumn].toLowerCase();
+    const valueB = b[sortColumn].toLowerCase();
+    const comparison = valueA.localeCompare(valueB);
+    return sortDirection === 'asc' ? comparison : -comparison;
+  });
+
+  // Effects
+
+   // Fetch all contacts when the page first loads
+  useEffect(() => {
+    getContacts()
+      .then((response) => {
+        setContacts(response.data.contacts);
+      })
+      .catch(() => {
+        setHasErrored(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  // Handlers
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
@@ -65,10 +92,8 @@ const ContactsPage = () => {
   // Called when the user clicks a column header
 const handleSort = (column: 'contact_name' | 'contact_type' | 'email') => {
   if (sortColumn === column) {
-    // If already sorting by this column, flip the direction
     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
   } else {
-    // Otherwise sort by the new column starting ascending
     setSortColumn(column);
     setSortDirection('asc');
   }
@@ -80,34 +105,11 @@ const getSortIcon = (column: string) => {
   return sortDirection === 'asc' ? ' ↑' : ' ↓';
 };
 
-// Sort the filtered contacts by the selected column
-const sortedContacts = [...filteredContacts].sort((a, b) => {
-  const valueA = a[sortColumn].toLowerCase();
-  const valueB = b[sortColumn].toLowerCase();
-  const comparison = valueA.localeCompare(valueB);
-  return sortDirection === 'asc' ? comparison : -comparison;
-});
-
-  // Fetch all contacts when the page first loads
-  useEffect(() => {
-    getContacts()
-      .then((response) => {
-        setContacts(response.data.contacts);
-      })
-      .catch(() => {
-        setHasErrored(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  
-
-  // Called by ContactFormModal in add mode when a contact is saved successfully
+// Called by ContactFormModal in add mode when a contact is saved successfully
   const handleContactAdded = (newContact: Contact) => {
     setContacts([...contacts, newContact]);
     setShowAddForm(false);
+    toast.success('Contact saved successfully');
   };
 
   // Called by ContactFormModal in edit mode when a contact is updated successfully
@@ -117,7 +119,9 @@ const sortedContacts = [...filteredContacts].sort((a, b) => {
     ));
     setSelectedContact(updatedContact);
     setShowEditForm(false);
+    toast.success('Contact updated successfully');
   };
+
 
   // Called when the user confirms the delete
   const handleContactDeleted = () => {
@@ -130,12 +134,15 @@ const sortedContacts = [...filteredContacts].sort((a, b) => {
         ));
         setSelectedContact(null);
         setShowDeleteConfirm(false);
+        toast.success('Contact deleted successfully');
       })
       .catch(() => {
         setShowDeleteConfirm(false);
-        alert('Could not delete contact. Please try again.');
+        toast.error('Could not delete contact. Please try again.');
       });
   };
+
+   // Helpers
 
   // Format contact type for display — replaces underscores with spaces
   const formatType = (type: string) => {
@@ -176,6 +183,7 @@ const sortedContacts = [...filteredContacts].sort((a, b) => {
     return <p className="status-message error">Something went wrong. Please try again.</p>;
   }
 
+  // Render
   return (
     <div className="contacts-page">
 
