@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getArtworks } from './artworks';
 import type { Artwork } from '../types/artwork';
+import { useNavigate } from 'react-router-dom';
 import './ArtworksPage.css';
 
 const ArtworksPage = () => {
@@ -66,6 +67,8 @@ const ArtworksPage = () => {
   const handleClosePanel = () => {
     setSelectedArtwork(null);
   };
+
+  const navigate = useNavigate();
 
   // Format the price with currency symbol
   const formatPrice = (price: number, currency: string) => {
@@ -250,6 +253,14 @@ const ArtworksPage = () => {
 
             {/* Edit button */}
             <button className="detail-edit-button">EDIT</button>
+
+            {/* View full details in artwork detail page */}
+            <button
+              className="artwork-view-details-button"
+              onClick={() => navigate(`/artworks/${selectedArtwork.artwork_id}`)}
+            >
+              View Full Details →
+            </button>
 
           </div>
         )}
