@@ -4,6 +4,7 @@ import ArtworksPage from '../components/ArtworksPage';
 import ArtistsPage from '../components/ArtistsPage';
 import ContactsPage from '../components/ContactsPage';
 import SalesPage from '../components/SalesPage';
+import ArtworkDetailPage from '../components/ArtworkDetailPage';
 
 <Route path="/sales" element={<Layout><SalesPage /></Layout>} />
 const NotFound     = () => <div>404 - Page not found</div>;
@@ -18,6 +19,7 @@ const AppRouter = () => {
         <Route path="/contacts" element={<Layout><ContactsPage /></Layout>} />
         <Route path="/sales" element={<Layout><SalesPage /></Layout>} />
         <Route path="*" element={<Layout><NotFound /></Layout>} />
+        <Route path="/artworks/:id" element={<Layout><ArtworkDetailPage /></Layout>} />
       </Routes>
     </BrowserRouter>
   );
