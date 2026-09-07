@@ -5,6 +5,7 @@ import ArtistsPage from '../components/ArtistsPage';
 import ContactsPage from '../components/ContactsPage';
 import SalesPage from '../components/SalesPage';
 import ArtworkDetailPage from '../components/ArtworkDetailPage';
+import HomePage from '../components/HomePage';
 
 <Route path="/sales" element={<Layout><SalesPage /></Layout>} />
 const NotFound     = () => <div>404 - Page not found</div>;
@@ -13,7 +14,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout><ArtworksPage /></Layout>} />
+        <Route path="/" element={<Layout><HomePage /></Layout>} />
         <Route path="/artworks" element={<Layout><ArtworksPage /></Layout>} />
         <Route path="/artists" element={<Layout><ArtistsPage /></Layout>} />
         <Route path="/contacts" element={<Layout><ContactsPage /></Layout>} />
