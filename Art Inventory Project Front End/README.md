@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# ArtDB — Art Inventory Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack art inventory management web application inspired by [Artlogic](https://artlogic.net). Built to manage artworks, artists, contacts, exhibitions, and sales pipelines for a commercial art gallery context.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+- **Frontend:** [coming soon]
+- **Backend API:** [coming soon]
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Screenshots
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+> 
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## About the Project
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+ArtDB was built as a portfolio project combining my professional background in art logistics with full-stack software development. The platform reflects real workflows used in commercial galleries — tracking stock status, managing collector relationships, and monitoring the sales pipeline.
+
+### Key features
+
+- **Artworks** — searchable, filterable grid with image support, status tracking (available, sold, reserved, on loan), and a slide-in detail panel
+- **Artists** — list view with biography and works in inventory
+- **Contacts** — full CRM with add, edit, delete, search, filter by type, and sortable columns
+- **Sales pipeline** — Kanban board grouping artworks by status
+- **Home page** — live inventory stats, new stock, and recently sold works
+- **Toast notifications** — global feedback system for all user actions
+- **Dark mode ready** — CSS custom properties across the full app
+
+---
+
+## Tech Stack
+
+### Frontend
+- React 19 with TypeScript
+- Vite
+- React Router DOM
+- Axios
+- Plain CSS with custom properties (no CSS framework)
+
+### Backend
+- Node.js / Express
+- PostgreSQL
+- pg / pg-format
+- dotenv
+- Nodemon
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js v18+
+- PostgreSQL
+
+### 1. Clone the repositories
+
+```bash
+# Backend
+git clone <backend-repo-url>
+cd art-inventory-project
+
+# Frontend
+git clone <frontend-repo-url>
+cd art-inventory-project-front-end
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Set up the backend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd art-inventory-project
+npm install
 ```
+
+Create a `.env.development` file in the root:
