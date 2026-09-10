@@ -1,9 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Toast from './Toast';
 import './Layout.css';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="layout">
 
@@ -12,7 +15,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
       {/* Horizontal nav bar - logo on left, links across */}
       <nav className="nav-bar">
-        <span className="nav-logo">ArtDB</span>
+        <span className="nav-logo" onClick={() => navigate('/')} >ArtDB</span>
+
+
         <div className="nav-links">
           <NavLink to="/artworks" className="nav-link">Artworks</NavLink>
           <NavLink to="/artists" className="nav-link">Artists</NavLink>

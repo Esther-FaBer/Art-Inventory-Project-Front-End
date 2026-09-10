@@ -132,3 +132,7 @@
   color: #9aa0a6;
   margin: 0;
 }
+
+.nav-logo {
+  cursor: pointer;
+}
