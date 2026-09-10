@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getArtworks } from './artworks';
-import { getExhibitions } from './exhibitions';
 import type { Artwork } from '../types/artwork';
 import StatCard from './StatCard';
 import './HomePage.css';
@@ -48,19 +47,18 @@ const HomePage = () => {
 
   // Effects
 
-  useEffect(() => {
-
-    Promise.all([getArtworks(), getExhibitions()])
-      .then(([artworksResponse, exhibitionsResponse]) => {
-        setArtworks(artworksResponse.data.artworks);
-        setExhibitionCount(exhibitionsResponse.data.exhibitions.length);
-      })
-      .catch(() => {
-        setHasErrored(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+ useEffect(() => {
+  getArtworks()
+    .then((response) => {
+      setArtworks(response.data.artworks);
+      setExhibitionCount(0); 
+    })
+    .catch(() => {
+      setHasErrored(true);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
   }, []);
 
   // Helpers
